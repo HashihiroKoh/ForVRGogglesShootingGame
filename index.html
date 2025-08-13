@@ -1,0 +1,151 @@
+<html>
+  <head>
+    <title>shooting game for web VR</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-environment-component@1.0.0/dist/aframe-environment-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v6.1.1/dist/aframe-extras.min.js"></script>
+    <script src="/script.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        // 初めに実行したい処理(非表示で弾とモンスターを作成)
+        bulletCreat();
+        monsterCreat();
+      });
+      AFRAME.registerComponent("onshoot", {
+        init: function () {
+          this.el.addEventListener("mousedown", clickOn);
+          this.el.addEventListener("mouseup", clickOff);
+        },
+      });
+    </script>
+  </head>
+
+  <body>
+    <a-scene vr-mode-ui="enabled: true">
+      <a-sky
+        cursor="rayOrigin: mouse"
+        onshoot
+        src="https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/uu.webp?v=1714900609129"
+      >
+      </a-sky>
+
+      <a-asset-item
+        id="red"
+        src="https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/RedMonster.glb?v=1714030125701"
+      ></a-asset-item>
+      <a-asset-item
+        id="blue"
+        src="https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/BlueMonster.glb?v=1714091602838"
+      ></a-asset-item>
+       <a-assets>
+        <img id="aim" src="https://cdn.glitch.global/157e5573-a3e6-47ab-9f9b-624516608cf0/aim.png?v=1749782631029">
+      </a-assets>
+      <a-camera
+        id="camera"
+        rotation="0 0 0"
+        position="0 0 0"
+        wasd-controls="enabled: false"
+      >
+        <a-image src="#aim" position="0 0 -1" height="0.2" width="0.27"></a-image>
+        
+
+        <a-entity>
+          <a-text
+            id="countText"
+            position="-0.3 0.5 -1"
+            width="2"
+            color="yellow"
+            value="0 / 20"
+          ></a-text>
+          <a-text
+            id="timerText"
+            position="0.2 0.5 -1"
+            width="2"
+            color="cyan"
+            value="60"
+          ></a-text>
+        </a-entity>
+        <a-text
+          id="startText"
+          position="-0.5 -0.5 -1"
+                font="ZenMaruGothic-Regular-msdf.json"
+                font-image="https://cdn.glitch.global/157e5573-a3e6-47ab-9f9b-624516608cf0/ZenMaruGothic-Regular.png?v=1749783890017"
+          value="画面クリックでゲームスタート"
+          color="green"
+                width="3"
+                negate="false"
+        ></a-text>
+      </a-camera>
+    </a-scene>
+  </body>
+</html>
+
+<!--
+
+<a-asset-item
+        id="red"
+        src="https://cdn.glitch.global/157e5573-a3e6-47ab-9f9b-624516608cf0/RedJelly.glb?v=1749449312767"
+      ></a-asset-item>
+      <a-asset-item
+        id="purple"
+        src="https://cdn.glitch.global/157e5573-a3e6-47ab-9f9b-624516608cf0/PurpleJelly.glb?v=1749449302536"
+      ></a-asset-item>
+     <a-asset-item
+        id="orange"
+        src="https://cdn.glitch.global/157e5573-a3e6-47ab-9f9b-624516608cf0/OrangeJelly.glb?v=1749449293122"
+      ></a-asset-item>
+     <a-asset-item
+        id="green"
+        src="https://cdn.glitch.global/157e5573-a3e6-47ab-9f9b-624516608cf0/GreenJelly.glb?v=1749449288647"
+      ></a-asset-item>
+      <a-asset-item
+        id="blue"
+        src="https://cdn.glitch.global/157e5573-a3e6-47ab-9f9b-624516608cf0/BlueJelly.glb?v=1749449166864"
+      ></a-asset-item>
+
+       <script>
+         const scene = document.querySelector("a-scene");
+      scene.addEventListener('enter-vr', () => {
+      console.log('VRモードが開始されました！');
+        
+    });
+
+    scene.addEventListener('exit-vr', () => {
+      console.log('VRモードが終了しました！');
+    });
+      </script>
+<a-entity oculus-touch-controls x-button-listener></a-entity>
+AFRAME.registerComponent('x-button-listener', {
+  init: function () {
+    var el = this.el;
+    el.addEventListener('xbuttondown', function (evt) {
+      el.setAttribute('visible', !el.getAttribute('visible'));
+    });
+  }
+});
+
+      <a-plane
+        id="startBtn"
+        position="0 0 -5"
+        rotation="0 0 0"
+        width="2"
+        height="1"
+        color="yellow"
+      >
+        <a-text
+          width="10"
+          position="-0.72 0 0"
+          value="START"
+          color="black"
+        ></a-text>
+      </a-plane>
+<a-entity
+          position="0 0 -1.1"
+          geometry="primitive: ring; radiusInner: 0.045; radiusOuter: 0.06"
+          material="color: tomato; shader: flat"
+        ></a-entity>
+-->
