@@ -56,7 +56,7 @@ var shot = function () {
   let num = getBullet();
   startTime[num] = new Date().getTime();
   const ban = new Audio(
-    "https://cdn.glitch.global/95f1d303-7f12-4a05-9cdf-ccadca6e370f/shot.mp3?v=1713753072464"
+    "../ARShootingGame/assets/shot.mp3"
   );
   ban.play();
   shootCnt++;
